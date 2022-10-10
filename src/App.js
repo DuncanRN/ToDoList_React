@@ -13,8 +13,9 @@ function App() {
 
   const [newTask, setNewTask] = useState("");
   
+  const [newRadio, setNewRadio] = useState("");
+  
   //
-
   //
 
   const taskNodes = tasks.map((task, index) => {
@@ -30,11 +31,17 @@ function App() {
     setNewTask(event.target.value);
   }
 
+
+  const handleRadioChangeValue = (event) => {
+    setNewRadio(event.target.value);
+  }
+
+
   const saveNewTask = (event) => {
     event.preventDefault();
 
     const copyTasks = [...tasks];
-    copyTasks.push({name : newTask, priority: "low"});  /// COME BACK TO THIS
+    copyTasks.push({name : newTask, priority: newRadio});  /// COME BACK TO THIS
     //
     //
     // COME BACK TO THIS
@@ -43,8 +50,6 @@ function App() {
     setNewTask("")
 
   }
-  
-
 
   return (
     <div className="App">
@@ -55,12 +60,12 @@ function App() {
       <label htmlFor="new-task">Add new task: </label>
       <input id="new-task" type = "text" value ={newTask} onChange={handleTaskInput} />
 
-      {/* <div onChange={handleRadioChangeValue}>
-        <input type="radio" id="high" name="priority" value="high"></input>
+      <div >
+        <input type="radio" id="high" name="priority" value="high" onChange={handleRadioChangeValue}></input>
         <label for="high">High</label>
-        <input type="radio" id="low" name="priority" value="low"></input>
+        <input type="radio" id="low" name="priority" value="low" onChange={handleRadioChangeValue}></input>
         <label for="low">Low</label>
-      </div> */}
+      </div>
 
 
       <input type="submit" value="Save New Task" />
